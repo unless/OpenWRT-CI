@@ -81,11 +81,11 @@ UPDATE_PACKAGE "easytier" "EasyTier/luci-app-easytier" "main"
 #UPDATE_PACKAGE "timecontrol" "sirpdboy/luci-app-timecontrol" "main"
 UPDATE_PACKAGE "viking" "VIKINGYFY/packages" "main" "" "gecoosac luci-app-timewol luci-app-wolplus"
 #UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
-UPDATE_PACKAGE "v2ray-geodata" "unless/v2ray-geodata" "master" "" "v2ray-geodata"
+UPDATE_PACKAGE "v2ray-geodata" "unless/v2ray-geodata" "master"
 UPDATE_PACKAGE "taskplan" "sirpdboy/luci-app-taskplan" "main"
-UPDATE_PACKAGE "luci-app-unishare" "linkease/nas-packages-luci" "main" "" "luci-app-unishare"
-UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "" "webdav2"
-UPDATE_PACKAGE "unishare" "linkease/nas-packages" "master" "" "unishare"
+UPDATE_PACKAGE "luci-app-unishare" "linkease/nas-packages-luci" "main" "pkg" "luci-app-unishare"
+UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2"
+UPDATE_PACKAGE "unishare" "linkease/nas-packages" "master" "pkg" "unishare"
 
 #更新软件包版本
 UPDATE_VERSION() {
