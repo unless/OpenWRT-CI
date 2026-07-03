@@ -63,6 +63,7 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 	fi
 fi
 
+#daed内核配置
 if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
     BOARD=$(grep -oP '^CONFIG_TARGET_BOARD="\K[^"]+' .config)
     SUBTARGET=$(grep -oP '^CONFIG_TARGET_SUBTARGET="\K[^"]+' .config)
