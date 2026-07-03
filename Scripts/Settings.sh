@@ -62,3 +62,17 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 		echo "qualcommax set up nowifi successfully!"
 	fi
 fi
+
+if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
+    BOARD=$(grep -oP '^CONFIG_TARGET_BOARD="\K[^"]+' .config)
+    SUBTARGET=$(grep -oP '^CONFIG_TARGET_SUBTARGET="\K[^"]+' .config)
+    # 如果变量未定义，从选中的target符号中提取（fallback）
+    if [ -z "$BOARD" ]; then
+        TARGET_SYM=$(grep -oP '^CONFIG_TARGET_\K[^=]+(?==y)' .config | grep '_' | head -1)
+        BOARD=${TARGET_SYM%_*}
+        SUBTARGET=${TARGET_SYM#*_}
+    fi
+    KERNEL_CONFIG_DIR="target/linux/$BOARD${SUBTARGET:+/$SUBTARGET}"
+    KERNEL_CONFIG_FILE=$(find "$KERNEL_CONFIG_DIR" -maxdepth 1 -type f -name "config-*" 2>/dev/null | head -1)
+    grep -q "^# CONFIG_ARM64_BRBE is not set" "$KERNEL_CONFIG_FILE" || echo "# CONFIG_ARM64_BRBE is not set" >> "$KERNEL_CONFIG_FILE"
+fi
