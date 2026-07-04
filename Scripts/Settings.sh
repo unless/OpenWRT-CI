@@ -77,3 +77,10 @@ if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
     KERNEL_CONFIG_FILE=$(find "$KERNEL_CONFIG_DIR" -maxdepth 1 -type f -name "config-*" 2>/dev/null | head -1)
     grep -q "^# CONFIG_ARM64_BRBE is not set" "$KERNEL_CONFIG_FILE" || echo "# CONFIG_ARM64_BRBE is not set" >> "$KERNEL_CONFIG_FILE"
 fi
+
+if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
+    echo "Device with 040g selected, patching network config"
+        sed -i '/nokia,xg-040g-md/,/;;/ {
+            s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
+        }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
+fi
