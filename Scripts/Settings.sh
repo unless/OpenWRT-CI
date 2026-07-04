@@ -91,23 +91,23 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
     if [ -f "$COMMON_DTSI" ] && ! grep -q '#include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"; then
         cat > "$DTSI_FILE" << 'EOF'
 &npu_binary {
-	reg = <0x0 0x84000000 0x0 0x100000>;
+	reg = <0x0 0x84000000 0x0 0x100000>;   /* 1MB */
 };
 
 &qdma0_buf {
-	reg = <0x0 0x87000000 0x0 0x200000>;
+	reg = <0x0 0x87000000 0x0 0x800000>;   /* 8MB */
 };
 
 &qdma1_buf {
-	reg = <0x0 0x89000000 0x0 0x100000>;
+	reg = <0x0 0x89000000 0x0 0x400000>;   /* 4MB */
 };
 
 &npu_pkt {
-	reg = <0x0 0x8a000000 0x0 0x200000>;
+	reg = <0x0 0x8a000000 0x0 0xb00000>;   /* 11MB */
 };
 
 &npu_txpkt {
-	reg = <0x0 0x8cc00000 0x0 0x100000>;
+	reg = <0x0 0x8cc00000 0x0 0x1000000>;  /* 16MB */
 };
 EOF
         sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
