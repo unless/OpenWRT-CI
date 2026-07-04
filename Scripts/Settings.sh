@@ -83,4 +83,34 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
         sed -i '/nokia,xg-040g-md/,/;;/ {
             s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
         }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
+
+    DTSI_DIR="target/linux/airoha/dts"
+    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
+    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
+
+    if [ -f "$COMMON_DTSI" ] && ! grep -q '#include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"; then
+        cat > "$DTSI_FILE" << 'EOF'
+&npu_binary {
+	reg = <0x0 0x84000000 0x0 0x100000>;
+};
+
+&qdma0_buf {
+	reg = <0x0 0x87000000 0x0 0x200000>;
+};
+
+&qdma1_buf {
+	reg = <0x0 0x89000000 0x0 0x100000>;
+};
+
+&npu_pkt {
+	reg = <0x0 0x8a000000 0x0 0x200000>;
+};
+
+&npu_txpkt {
+	reg = <0x0 0x8cc00000 0x0 0x100000>;
+};
+EOF
+        sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
+        echo "Added include to $COMMON_DTSI"
+    fi
 fi
