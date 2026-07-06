@@ -86,8 +86,8 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 
 	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
-
-	if [[ "${WRT_CONFIG,,}" == *"483"* ]]; then
+	
+	elif  [[ "${WRT_CONFIG,,}" == *"483"* ]]; then
 	    DTSI_DIR="target/linux/airoha/dts"
 	    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
 	    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
@@ -114,4 +114,5 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 EOF
 	    sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
 		echo "WRT_WIFI=483MB" >> $GITHUB_ENV
+	fi
 fi
