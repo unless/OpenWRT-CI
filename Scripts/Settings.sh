@@ -29,7 +29,7 @@ CFG_FILE="./package/base-files/files/bin/config_generate"
 #修改默认IP地址
 sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" $CFG_FILE
 #修改默认主机名
-sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE
+#sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE
 
 #配置文件修改
 echo "CONFIG_PACKAGE_luci=y" >> ./.config
@@ -111,6 +111,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 };
 EOF
         sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
+		echo "WRT_WIFI=438RAM" >> $GITHUB_ENV
         echo "Added include to $COMMON_DTSI"
     fi
 fi
