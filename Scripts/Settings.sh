@@ -84,12 +84,14 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
             s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
         }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
 
-    DTSI_DIR="target/linux/airoha/dts"
-    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
-    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
+	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
+		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 
-    if [ -f "$COMMON_DTSI" ] && ! grep -q '#include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"; then
-        cat > "$DTSI_FILE" << 'EOF'
+	if [[ "${WRT_CONFIG,,}" == *"483"* ]]; then
+	    DTSI_DIR="target/linux/airoha/dts"
+	    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
+	    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
+	    cat > "$DTSI_FILE" << 'EOF'
 &npu_binary {
 	reg = <0x0 0x84000000 0x0 0x100000>;   /* 1MB */
 };
@@ -110,8 +112,6 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	reg = <0x0 0x8cc00000 0x0 0x1000000>;  /* 16MB */
 };
 EOF
-        sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
-		echo "WRT_WIFI=438RAM" >> $GITHUB_ENV
-        echo "Added include to $COMMON_DTSI"
-    fi
+	    sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
+		echo "WRT_WIFI=483MB" >> $GITHUB_ENV
 fi
