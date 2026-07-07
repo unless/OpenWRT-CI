@@ -79,15 +79,15 @@ if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
 fi
 
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
-    echo "Device with 040g selected, patching network config"
-        sed -i '/nokia,xg-040g-md/,/;;/ {
-            s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
-        }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
-
 	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"483"* ]]; then
+	    echo "Device with 040g selected, patching network config"
+        sed -i '/nokia,xg-040g-md/,/;;/ {
+            s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
+        }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
+
 	    DTSI_DIR="target/linux/airoha/dts"
 	    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
 	    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
