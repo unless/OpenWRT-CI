@@ -75,7 +75,7 @@ if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
     fi
     KERNEL_CONFIG_DIR="target/linux/$BOARD${SUBTARGET:+/$SUBTARGET}"
     KERNEL_CONFIG_FILE=$(find "$KERNEL_CONFIG_DIR" -maxdepth 1 -type f -name "config-*" 2>/dev/null | head -1)
-    grep -q "^# CONFIG_ARM64_BRBE is not set" "$KERNEL_CONFIG_FILE" || echo "# CONFIG_ARM64_BRBE is not set" >> "$KERNEL_CONFIG_FILE"
+#    grep -q "^# CONFIG_ARM64_BRBE is not set" "$KERNEL_CONFIG_FILE" || echo "# CONFIG_ARM64_BRBE is not set" >> "$KERNEL_CONFIG_FILE"
 fi
 
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
