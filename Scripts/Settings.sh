@@ -63,35 +63,18 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 	fi
 fi
 
-#daed内核配置
-if grep -q "^CONFIG_PACKAGE_daed=y" .config; then
-    BOARD=$(grep -oP '^CONFIG_TARGET_BOARD="\K[^"]+' .config)
-    SUBTARGET=$(grep -oP '^CONFIG_TARGET_SUBTARGET="\K[^"]+' .config)
-    # 如果变量未定义，从选中的target符号中提取（fallback）
-    if [ -z "$BOARD" ]; then
-        TARGET_SYM=$(grep -oP '^CONFIG_TARGET_\K[^=]+(?==y)' .config | grep '_' | head -1)
-        BOARD=${TARGET_SYM%_*}
-        SUBTARGET=${TARGET_SYM#*_}
-    fi
-    KERNEL_CONFIG_DIR="target/linux/$BOARD${SUBTARGET:+/$SUBTARGET}"
-    KERNEL_CONFIG_FILE=$(find "$KERNEL_CONFIG_DIR" -maxdepth 1 -type f -name "config-*" 2>/dev/null | head -1)
-#    grep -q "^# CONFIG_ARM64_BRBE is not set" "$KERNEL_CONFIG_FILE" || echo "# CONFIG_ARM64_BRBE is not set" >> "$KERNEL_CONFIG_FILE"
-fi
-
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
-	    echo "Device with 040g selected, patching network config"
-        sed -i '/nokia,xg-040g-md/,/;;/ {
-            s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
-        }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
-        curl -L https://github.com/unless/immortalwrt/commit/c8a53cdb79ab880614e2042515f264c73c5db6e5.patch -o /tmp/fix-cpufreq.patch
+		https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340
+		curl -L https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340.patch -o /tmp/add-wan.patch
+		patch -p1 < /tmp/add-wan.patch
+        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
         patch -p1 < /tmp/fix-cpufreq.patch
-        curl -L https://github.com/unless/immortalwrt/commit/78e22a0df0e6baa90b4b260a5145996286cc48df.patch -o /tmp/fix-438ramdts.patch
-        patch -p1 < /tmp/fix-438ramdts.patch
-	
+        curl -L https://github.com/unless/immortalwrt/commit/806a9955cc4d8fc3dc575d7c7c858adb03cb16ad.patch -o /tmp/add-438mb-dts.patch
+        patch -p1 < /tmp/add-438mb-dts.patch
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
