@@ -82,37 +82,16 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
-	elif  [[ "${WRT_CONFIG,,}" == *"483"* ]]; then
+	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
 	    echo "Device with 040g selected, patching network config"
         sed -i '/nokia,xg-040g-md/,/;;/ {
             s/^\([[:space:]]*\)ucidef_set_interface_lan "lan1 lan2 lan3 lan4"[[:space:]]*$/\1ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"/
         }' target/linux/airoha/an7581/base-files/etc/board.d/02_network
-
-	    DTSI_DIR="target/linux/airoha/dts"
-	    DTSI_FILE="$DTSI_DIR/an7581-512mib-ram.dtsi"
-	    COMMON_DTSI="$DTSI_DIR/an7581-nokia_xg-040g-md-common.dtsi"
-	    cat > "$DTSI_FILE" << 'EOF'
-&npu_binary {
-	reg = <0x0 0x84000000 0x0 0x100000>;   /* 1MB */
-};
-
-&qdma0_buf {
-	reg = <0x0 0x87000000 0x0 0x800000>;   /* 8MB */
-};
-
-&qdma1_buf {
-	reg = <0x0 0x89000000 0x0 0x400000>;   /* 4MB */
-};
-
-&npu_pkt {
-	reg = <0x0 0x8a000000 0x0 0xb00000>;   /* 11MB */
-};
-
-&npu_txpkt {
-	reg = <0x0 0x8cc00000 0x0 0x1000000>;  /* 16MB */
-};
-EOF
-	    sed -i '/^#include "an7581\.dtsi"/a #include "an7581-512mib-ram.dtsi"' "$COMMON_DTSI"
-		echo "WRT_WIFI=483MB" >> $GITHUB_ENV
+        curl -L https://github.com/unless/immortalwrt/commit/c8a53cdb79ab880614e2042515f264c73c5db6e5.patch -o /tmp/fix-cpufreq.patch
+        patch -p1 < /tmp/fix-cpufreq.patch
+        curl -L https://github.com/unless/immortalwrt/commit/78e22a0df0e6baa90b4b260a5145996286cc48df.patch -o /tmp/fix-438ramdts.patch
+        patch -p1 < /tmp/fix-438ramdts.patch
+	
+		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
