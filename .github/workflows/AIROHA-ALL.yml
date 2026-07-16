@@ -35,7 +35,7 @@ jobs:
       fail-fast: false
       #max-parallel: 3
       matrix:
-        CONFIG: [AIROHA-TEST-438MB,AIROHA-TEST-384MB]
+        CONFIG: [AIROHA-438MB,AIROHA-384MB]
         SOURCE: [immortalwrt/immortalwrt]
         BRANCH: [master]
 
