@@ -68,7 +68,6 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
-		https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340
 		curl -L https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340.patch -o /tmp/add-wan.patch
 		patch -p1 < /tmp/add-wan.patch
         curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
