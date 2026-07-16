@@ -39,7 +39,6 @@ CONFIG_HTOP_LMSENSORS=n
 CONFIG_PACKAGE_zram-swap=y
 
 # 关闭的功能
-CONFIG_WIFI_SCRIPTS_UCODE=n
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy=n
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client=n
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server=n
