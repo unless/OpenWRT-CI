@@ -86,9 +86,8 @@ KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
 echo $KMOD_URL
 hash_value=$(wget -qO- "$KMOD_URL" | grep -o '[0-9a-f]\{32\}' | tail -1)
 echo $hash_value
-# 6. 输出结果
 if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
-#    echo "$hash_value" > .vermagic
+    echo "$hash_value" > .vermagic
     echo "kernel内核md5校验码：$hash_value"
 else
     echo "未找到有效的 kernel hash"
