@@ -80,9 +80,13 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 fi
 
 TARGET_DIR=$(grep -E '^CONFIG_TARGET_(BOARD|SUBTARGET)=' .config | cut -d'"' -f2 | paste -sd '/')
+echo $TARGET_DIR
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
+echo $VERSION_REPO
 KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
+echo $KMOD_URL
 hash_value=$(wget -qO- "$KMOD_URL" | grep -o '[0-9a-f]\{32\}' | tail -1)
+echo $hash_value
 if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
     echo "$hash_value" > .vermagic
     echo "kernel内核md5校验码：$hash_value"
