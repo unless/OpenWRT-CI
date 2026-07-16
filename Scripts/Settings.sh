@@ -81,6 +81,7 @@ fi
 
 TARGET_DIR=$(grep -E '^CONFIG_TARGET_(BOARD|SUBTARGET)=' .config | cut -d'"' -f2 | paste -sd '/')
 echo $TARGET_DIR
+cat .config
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
 echo $VERSION_REPO
 KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
