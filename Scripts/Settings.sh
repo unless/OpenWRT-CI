@@ -59,6 +59,18 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 	#无WIFI配置调整Q6大小
 	if [[ "${WRT_CONFIG,,}" == *"wifi"* && "${WRT_CONFIG,,}" == *"no"* ]]; then
 		sed -i '/^DEFAULT_PACKAGES += ath11k-firmware-ipq6018-ddwrt/s/^/#/' target/linux/qualcommax/ipq60xx/target.mk
+		sed -i  \
+		  -e 's/\<kmod-ath11k-ahb\>[[:space:]]*//g' \
+		  -e 's/\<kmod-ath11k-pci\>[[:space:]]*//g' \
+		  -e 's/\<kmod-ath11k\>[[:space:]]*//g' \
+		  -e 's/\<wpad-openssl\>[[:space:]]*//g' \
+		  -e 's/\<kmod-usb3\>[[:space:]]*//g' \
+		  -e 's/\<kmod-usb-dwc3-qcom\>[[:space:]]*//g' \
+		  -e 's/\<kmod-usb-serial-qualcomm\>[[:space:]]*//g' \
+		  -e 's/\<kmod-usb-dwc3\>[[:space:]]*//g' \
+		  -e 's/\<kmod-fs-ext4\>[[:space:]]*//g' \
+		  -e 's/\<kmod-fs-f2fs\>[[:space:]]*//g' \
+		  target/linux/qualcommax/Makefile
 		find $DTS_PATH -type f ! -iname '*nowifi*' -exec sed -i 's/ipq\(6018\|8074\).dtsi/ipq\1-nowifi.dtsi/g' {} +
 		echo "qualcommax set up nowifi successfully!"
 	fi
