@@ -60,6 +60,9 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 	if [[ "${WRT_CONFIG,,}" == *"wifi"* && "${WRT_CONFIG,,}" == *"no"* ]]; then
 		sed -i '/^DEFAULT_PACKAGES += ath11k-firmware-ipq6018-ddwrt/s/^/#/' target/linux/qualcommax/ipq60xx/target.mk
 		sed -i  \
+		  -e 's/\<automount\>[[:space:]]*//g' \
+		  -e 's/\<f2fs-tools\>[[:space:]]*//g' \
+		  -e 's/\<e2fsprogs\>[[:space:]]*//g' \
 		  -e 's/\<kmod-ath11k-ahb\>[[:space:]]*//g' \
 		  -e 's/\<kmod-ath11k-pci\>[[:space:]]*//g' \
 		  -e 's/\<kmod-ath11k\>[[:space:]]*//g' \
