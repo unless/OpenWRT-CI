@@ -92,10 +92,12 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
-#		curl -L https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340.patch -o /tmp/add-wan.patch
+		curl -L https://github.com/unless/immortalwrt/commit/39c517de8c32081b3a26578f8030b87b1b2c9340.patch -o /tmp/add-wan.patch
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24265.patch -o /tmp/add-wan.patch
 		patch -p1 < /tmp/add-wan.patch
-        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
+#        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
+        curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24265.patch -o /tmp/fix-cpufreq.patch
+		
         patch -p1 < /tmp/fix-cpufreq.patch
         curl -L https://github.com/unless/immortalwrt/commit/806a9955cc4d8fc3dc575d7c7c858adb03cb16ad.patch -o /tmp/add-438mb-dts.patch
         patch -p1 < /tmp/add-438mb-dts.patch
