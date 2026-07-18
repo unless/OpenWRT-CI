@@ -98,6 +98,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 #        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
         curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24265.patch -o /tmp/fix-cpufreq.patch
 		echo "CONFIG_MTK_SCPSYS=n" >> target/linux/airoha/an7581/config-6.18
+		echo "CONFIG_MTK_SCPSYS_PM_DOMAINS=n" >> target/linux/airoha/an7581/config-6.18
 
         patch -p1 < /tmp/fix-cpufreq.patch
         curl -L https://github.com/unless/immortalwrt/commit/806a9955cc4d8fc3dc575d7c7c858adb03cb16ad.patch -o /tmp/add-438mb-dts.patch
