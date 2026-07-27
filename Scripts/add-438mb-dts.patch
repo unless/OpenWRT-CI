@@ -38,7 +38,7 @@ diff --git a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi b/targe
 index aecddc73da9..f070ff1452f 100644
 --- a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
 +++ b/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
-@@ -5,6 +5,7 @@
+@@ -5,3 +5,4 @@
  #include <dt-bindings/gpio/gpio.h>
  #include <dt-bindings/input/input.h>
  #include "an7581.dtsi"
