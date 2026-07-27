@@ -1,0 +1,22 @@
+From 39c517de8c32081b3a26578f8030b87b1b2c9340 Mon Sep 17 00:00:00 2001
+From: unn <jbpv@163.com>
+Date: Sun, 12 Jul 2026 13:29:20 +0800
+Subject: [PATCH] Add WAN for XG-040G-MD
+
+---
+ target/linux/airoha/an7581/base-files/etc/board.d/02_network | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/linux/airoha/an7581/base-files/etc/board.d/02_network b/target/linux/airoha/an7581/base-files/etc/board.d/02_network
+index 107ca370462..3572b705fc6 100644
+--- a/target/linux/airoha/an7581/base-files/etc/board.d/02_network
++++ b/target/linux/airoha/an7581/base-files/etc/board.d/02_network
+@@ -22,7 +22,7 @@ an7581_setup_interfaces()
+ 		;;
+ 	nokia,xg-040g-md |\
+ 	nokia,xg-040g-md-ubi)
+-		ucidef_set_interface_lan "lan1 lan2 lan3 lan4"
++		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "lan4"
+ 		;;
+ 	*)
+ 		echo "Unsupported hardware. Network interfaces not initialized"
