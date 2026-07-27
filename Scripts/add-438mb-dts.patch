@@ -1,0 +1,45 @@
+From 806a9955cc4d8fc3dc575d7c7c858adb03cb16ad Mon Sep 17 00:00:00 2001
+From: unn <jbpv@163.com>
+Date: Sun, 12 Jul 2026 13:27:14 +0800
+Subject: [PATCH] Add 438MB DTS for XG-040G-MD
+
+---
+ .../linux/airoha/dts/an7581-512mib-ram.dtsi   | 19 +++++++++++++++++++
+ .../dts/an7581-nokia_xg-040g-md-common.dtsi   |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 target/linux/airoha/dts/an7581-512mib-ram.dtsi
+
+diff --git a/target/linux/airoha/dts/an7581-512mib-ram.dtsi b/target/linux/airoha/dts/an7581-512mib-ram.dtsi
+new file mode 100644
+index 00000000000..48bea9c7c6a
+--- /dev/null
++++ b/target/linux/airoha/dts/an7581-512mib-ram.dtsi
+@@ -0,0 +1,19 @@
++&npu_binary {
++    reg = <0x0 0x84000000 0x0 0x100000>;   /* 1MB */
++};
++
++&qdma0_buf {
++    reg = <0x0 0x87000000 0x0 0x800000>;   /* 8MB */
++};
++
++&qdma1_buf {
++    reg = <0x0 0x89000000 0x0 0x400000>;   /* 4MB */
++};
++
++&npu_pkt {
++    reg = <0x0 0x8a000000 0x0 0xb00000>;   /* 11MB */
++};
++
++&npu_txpkt {
++    reg = <0x0 0x8cc00000 0x0 0x1000000>;  /* 16MB */
++};
+diff --git a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi b/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
+index aecddc73da9..f070ff1452f 100644
+--- a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
++++ b/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
+@@ -5,6 +5,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/input/input.h>
+ #include "an7581.dtsi"
++#include "an7581-512mib-ram.dtsi"
