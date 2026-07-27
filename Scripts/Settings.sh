@@ -96,12 +96,10 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		patch -p1 < /tmp/add-wan.patch
 #        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
         curl -L https://github.com/openwrt/openwrt/pull/24265.patch -o /tmp/fix-cpufreq.patch
-#		echo "CONFIG_MTK_SCPSYS=n" >> target/linux/airoha/an7581/config-6.18
-#		echo "CONFIG_MTK_SCPSYS_PM_DOMAINS=n" >> target/linux/airoha/an7581/config-6.18
-
         patch -p1 < /tmp/fix-cpufreq.patch
         curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-438mb-dts.patch -o /tmp/add-438mb-dts.patch
         patch -p1 < /tmp/add-438mb-dts.patch
+		sed -i '/#include "an7581.dtsi"/a #include "an7581-512mib-ram.dtsi"' target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
