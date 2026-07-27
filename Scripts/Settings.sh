@@ -92,7 +92,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
-		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/refs/heads/main/Scripts/add-wan.patch -o /tmp/add-wan.patch
+		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch -o /tmp/add-wan.patch
 		patch -p1 < /tmp/add-wan.patch
 #        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
         curl -L https://github.com/openwrt/openwrt/pull/24265.patch -o /tmp/fix-cpufreq.patch
@@ -100,7 +100,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 #		echo "CONFIG_MTK_SCPSYS_PM_DOMAINS=n" >> target/linux/airoha/an7581/config-6.18
 
         patch -p1 < /tmp/fix-cpufreq.patch
-        curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/refs/heads/main/Scripts/add-438mb-dts.patch -o /tmp/add-438mb-dts.patch
+        curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-438mb-dts.patch -o /tmp/add-438mb-dts.patch
         patch -p1 < /tmp/add-438mb-dts.patch
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
