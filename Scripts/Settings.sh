@@ -64,26 +64,21 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 fi
 
 if grep -q "zn_m2=y" .config; then
-    sed -i  \
-        -e 's/\<automount\>[[:space:]]*//g' \
-        -e 's/\<f2fs-tools\>[[:space:]]*//g' \
-        -e 's/\<e2fsprogs\>[[:space:]]*//g' \
-        -e 's/\<kmod-usb3\>[[:space:]]*//g' \
-        -e 's/\<kmod-usb-dwc3-qcom\>[[:space:]]*//g' \
-        -e 's/\<kmod-usb-serial-qualcomm\>[[:space:]]*//g' \
-        -e 's/\<kmod-usb-dwc3\>[[:space:]]*//g' \
-        -e 's/\<kmod-fs-ext4\>[[:space:]]*//g' \
-        -e 's/\<kmod-fs-f2fs\>[[:space:]]*//g' \
-        target/linux/qualcommax/Makefile
+		sed -i  \
+		        -e 's/[[:space:]]*\<automount\>[[:space:]]*/ /g' \
+		        -e 's/[[:space:]]*\<f2fs-tools\>[[:space:]]*/ /g' \
+		        -e 's/[[:space:]]*\<e2fsprogs\>[[:space:]]*/ /g' \
+		        -e 's/[[:space:]]*\<kmod-usb[^[:space:]]*\>[[:space:]]*/ /g' \
+		        -e 's/[[:space:]]*\<kmod-fs[^[:space:]]*\>[[:space:]]*/ /g' \
+		        target/linux/qualcommax/Makefile
     if [[ "${WRT_CONFIG,,}" == *"wifi"* && "${WRT_CONFIG,,}" == *"no"* ]]; then
         sed -i '/DEVICE_PACKAGES := ipq-wifi-zn_m2/s/^/#/' target/linux/qualcommax/image/ipq60xx.mk
-        sed -i '/^DEFAULT_PACKAGES += ath11k-firmware-ipq6018-ddwrt/s/^/#/' target/linux/qualcommax/ipq60xx/target.mk
-        sed -i  \
-            -e 's/\<kmod-ath11k-ahb\>[[:space:]]*//g' \
-            -e 's/\<kmod-ath11k-pci\>[[:space:]]*//g' \
-            -e 's/\<kmod-ath11k\>[[:space:]]*//g' \
-            -e 's/\<wpad-openssl\>[[:space:]]*//g' \
-            target/linux/qualcommax/Makefile
+		sed -i 's/[[:space:]]*\<ath11k-firmware-ipq6018[^[:space:]]*\>[[:space:]]*/ /g' target/linux/qualcommax/ipq60xx/target.mk
+		sed -i \
+		    -e 's/\<kmod-ath11k[^[:space:]]*\>[[:space:]]*//g' \
+		    -e 's/\<wpad-openssl\>[[:space:]]*//g' \
+			-e 's/\<kmod-qca-nss-drv-wifi-meshmgr\>[[:space:]]*/ /g' \
+		    target/linux/qualcommax/Makefile
     fi
 fi
 
