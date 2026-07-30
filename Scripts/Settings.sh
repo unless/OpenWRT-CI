@@ -107,6 +107,7 @@ echo $hash_value
 if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
     echo "$hash_value" > .vermagic
     echo "kernel内核md5校验码：$hash_value"
+	sed -i $'/vermagic/c\ \t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
 else
     echo "未找到有效的 kernel hash"
 fi
