@@ -87,17 +87,11 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
-#        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch -o /tmp/fix-cpufreq.patch
-    patch_urls=(
-        "https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch"
-        "https://github.com/openwrt/openwrt/pull/24265.patch"
-        "https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-438mb-dts.patch"
-		"https://github.com/openwrt/openwrt/pull/24267.patch"
-    )
-    for url in "${patch_urls[@]}"; do
-        curl -L "$url" | patch -p1
-    done
-		sed -i '/#include "an7581.dtsi"/a #include "an7581-512mib-ram.dtsi"' target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
+#        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch | patch -p1 # cpufreq
+		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
+		curl -L https://github.com/openwrt/openwrt/pull/24265.patch | patch -p1 # cpufreq
+		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-438mb-dts.patch | patch -p1 #438mb
+		curl -L https://github.com/openwrt/openwrt/pull/24267.patch | patch -p1 # pinctrl fixes
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
