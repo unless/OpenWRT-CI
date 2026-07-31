@@ -111,8 +111,3 @@ if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
 else
     echo "未找到有效的 kernel hash"
 fi
-# 删除含 vmlinux-btf 依赖的行
-sed -i '/+DAED_USE_VMLINUX_BTF:vmlinux-btf/d' package/daed/Makefile
-
-# 同时删除上一行末尾的续行符（如果存在）
-sed -i '/+@KERNEL_XDP_SOCKETS/ s/ \\//' package/daed/Makefile
