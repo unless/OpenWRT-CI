@@ -88,7 +88,8 @@ UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2"
 UPDATE_PACKAGE "unishare" "linkease/nas-packages" "master" "pkg" "unishare"
 #UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix" "luci-app-daed daed"
 #UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
-UPDATE_PACKAGE "daed" "kenzok8/small-package" "main" "luci-app-daed daed"
+UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "" "luci-app-dae dae"
+UPDATE_PACKAGE "daed" "kenzok8/small-package" "main" "" "luci-app-daed daed"
 
 #更新软件包版本
 UPDATE_VERSION() {
