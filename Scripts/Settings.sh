@@ -97,17 +97,14 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 fi
 
 TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_/\//g')
-echo $TARGET_DIR
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
-echo $VERSION_REPO
 KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
-echo $KMOD_URL
 hash_value=$(wget -qO- "$KMOD_URL" | grep -o '[0-9a-f]\{32\}' | tail -1)
-echo $hash_value
 if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
     echo "$hash_value" > .vermagic
     echo "kernel内核md5校验码：$hash_value"
 	sed -i $'/vermagic/c\\\t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
+	sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
 else
     echo "未找到有效的 kernel hash"
 fi
