@@ -89,9 +89,9 @@ UPDATE_PACKAGE "taskplan" "sirpdboy/luci-app-taskplan" "main"
 UPDATE_PACKAGE "luci-app-unishare" "linkease/nas-packages-luci" "main" "pkg" "luci-app-unishare"
 UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2 unishare"
 #UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix" "pkg" "luci-app-daed daed"
-UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
-#UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede"
-UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
+#UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
+UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede"
+#UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
 
 #更新软件包版本
 UPDATE_VERSION() {
