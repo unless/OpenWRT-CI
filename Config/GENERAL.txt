@@ -16,13 +16,10 @@ CONFIG_KERNEL_NETKIT=y
 
 # LuCI Apps
 CONFIG_PACKAGE_luci-theme-argon=y
-CONFIG_PACKAGE_luci-app-dae=n
-CONFIG_PACKAGE_luci-app-daed=n
 CONFIG_PACKAGE_luci-app-daede=y
 CONFIG_PACKAGE_luci-app-easytier=y
 CONFIG_PACKAGE_luci-app-ramfree=y
 CONFIG_PACKAGE_luci-app-taskplan=y
-CONFIG_PACKAGE_luci-app-timewol=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-wechatpush=y
