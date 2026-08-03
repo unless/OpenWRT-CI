@@ -95,14 +95,13 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	fi
 fi
 
-
 # 1. 提取 TARGET_DIR 与 VERSION_REPO
 TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_/\//g')
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
 KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
 
 # 2. 获取完整内核版本
-KERNEL_BASE=$(grep '^CONFIG_LINUX_[0-9]\+_[0-9]\+=[ym]' .config | sed 's/^CONFIG_LINUX_//;s/=.*//' | tr '_' '.')
+KERNEL_BASE=$(basename target/linux/$TARGET_DIR/config-* | sed 's/config-//')
 PATCH_VER=$(sed -n "s/^LINUX_VERSION-$KERNEL_BASE = //p" target/linux/generic/kernel-$KERNEL_BASE)
 FULL_VER="$KERNEL_BASE$PATCH_VER"
 
