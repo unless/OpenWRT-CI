@@ -91,20 +91,30 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		curl -L https://github.com/openwrt/openwrt/pull/24265.patch | patch -p1 # cpufreq
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-438mb-dts.patch | patch -p1 #438mb
-		curl -L https://github.com/openwrt/openwrt/pull/24267.patch | patch -p1 # pinctrl fixes
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
 
+
+# 1. 提取 TARGET_DIR 与 VERSION_REPO
 TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_/\//g')
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
 KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
-hash_value=$(wget -qO- "$KMOD_URL" | grep -o '[0-9a-f]\{32\}' | tail -1)
-if [[ "$hash_value" =~ ^[0-9a-f]{32}$ ]]; then
-    echo "$hash_value" > .vermagic
-    echo "kernel内核md5校验码：$hash_value"
-#	sed -i $'/vermagic/c\\\t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
-#	sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
-else
-    echo "未找到有效的 kernel hash"
+
+# 2. 获取完整内核版本
+KERNEL_BASE=$(grep '^CONFIG_LINUX_[0-9]\+_[0-9]\+=[ym]' .config | sed 's/^CONFIG_LINUX_//;s/=.*//' | tr '_' '.')
+PATCH_VER=$(sed -n "s/^LINUX_VERSION-$KERNEL_BASE = //p" target/linux/generic/kernel-$KERNEL_BASE)
+FULL_VER="$KERNEL_BASE$PATCH_VER"
+
+# 3. 匹配远程目录
+dir_name=$(wget -qO- "$KMOD_URL" | grep -o "${FULL_VER}-[0-9]\+-[0-9a-f]\{32\}/" | tail -1)
+
+if [ -n "$dir_name" ]; then
+    sed -i "s/^LINUX_RELEASE.*/LINUX_RELEASE:=$(echo "$dir_name" | cut -d'-' -f2)/" include/kernel-version.mk
+    echo "$dir_name" | cut -d'-' -f3 | tr -d '/' > .vermagic
+    sed -i $'/vermagic/c\\\t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
+    sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
+    echo "成功匹配内核 $FULL_VER-$(echo "$dir_name" | cut -d'-' -f2) 的 md5 校验码：$(cat .vermagic)"
+ else
+    echo "错误: 未找到与内核版本 $FULL_VER 匹配的预编译 kmod 目录"
 fi
