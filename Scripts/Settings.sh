@@ -96,7 +96,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 fi
 
 TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_/\//g')
-echo TARGET_DIR $VERSION_REPO
+echo TARGET_DIR $TARGET_DIR
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),\(https[^)]*\)).*/\1/p' include/version.mk)
 echo VERSION_REPO $VERSION_REPO
 KERNEL_BASE=$(basename target/linux/$TARGET_DIR/config-* | sed 's/config-//')
