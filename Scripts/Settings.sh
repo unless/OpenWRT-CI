@@ -99,7 +99,7 @@ TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_
 echo TARGET_DIR $TARGET_DIR
 VERSION_REPO=$(sed -n 's/^VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),\(https[^)]*\)).*/\1/p' include/version.mk)
 echo VERSION_REPO $VERSION_REPO
-KERNEL_BASE=$(basename target/linux/$TARGET_DIR/config-* | sed 's/config-//')
+KERNEL_BASE=$(sed -n 's/^KERNEL_PATCHVER:=//p' target/linux/${TARGET_DIR%%/*}/Makefile)
 echo KERNEL_BASE $KERNEL_BASE
 PATCH_VER=$(sed -n "s/^LINUX_VERSION-$KERNEL_BASE = //p" target/linux/generic/kernel-$KERNEL_BASE)
 echo PATCH_VER $PATCH_VER
