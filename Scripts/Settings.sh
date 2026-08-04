@@ -95,23 +95,23 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	fi
 fi
 
-# 1. 提取 TARGET_DIR 与 VERSION_REPO
 TARGET_DIR=$(sed -n 's/^CONFIG_TARGET_\(.*\)_DEVICE_.*$/\1/p' .config | sed 's/_/\//g')
-VERSION_REPO=$(sed -n 's/^VERSION_REPO:=.*\(https[^)]*\).*/\1/p' include/version.mk)
-KMOD_URL="$VERSION_REPO/targets/$TARGET_DIR/kmods/"
-
-# 2. 获取完整内核版本
+VERSION_REPO=$(sed -n 's/^VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),\(https[^)]*\)).*/\1/p' include/version.mk)
 KERNEL_BASE=$(basename target/linux/$TARGET_DIR/config-* | sed 's/config-//')
 PATCH_VER=$(sed -n "s/^LINUX_VERSION-$KERNEL_BASE = //p" target/linux/generic/kernel-$KERNEL_BASE)
 FULL_VER="$KERNEL_BASE$PATCH_VER"
-
-# 3. 匹配远程目录
-hash_value=$(wget -qO- "$KMOD_URL" | grep -o "${FULL_VER}-[0-9]\+-[0-9a-f]\{32\}/" | tail -1 | grep -o '[0-9a-f]\{32\}')
+URL1="${VERSION_REPO%/*}/${VERSION_REPO##*/}/targets/$TARGET_DIR/kmods/"
+URL2="https://downloads.openwrt.org/${VERSION_REPO##*/}/targets/$TARGET_DIR/kmods/"
+get_hash(){ wget -qO- "$1" | grep -o "${FULL_VER}-[0-9]\+-[0-9a-f]\{32\}/" | tail -1 | grep -o '[0-9a-f]\{32\}'; }
+hash_value1=$(get_hash "$URL1"); hash_value2=$(get_hash "$URL2"); hash_value="${hash_value1:-$hash_value2}"
 if [ -n "$hash_value" ]; then
     echo "$hash_value" > .vermagic
+    BASE_URL=$( [ -n "$hash_value1" ] && echo "$URL1" || echo "$URL2" )
+    FINAL_URL="${BASE_URL}$(wget -qO- "$BASE_URL" | grep -o "${FULL_VER}-[0-9]\+-[0-9a-f]\{32\}/" | tail -1)packages.adb"
+    echo "$FINAL_URL" > package/system/apk/files/customfeeds.list
     sed -i $'/vermagic/c\\\t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
-    sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
-    echo "成功匹配内核 $FULL_VER 的 md5 校验码：$hash_value"
+#    sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
+    echo "成功匹配内核 $FULL_VER 的 md5 校验码：$hash_value，已写入 customfeeds.list：$FINAL_URL"
 else
     echo "错误: 未找到与内核版本 $FULL_VER 匹配的预编译 kmod 目录"
 fi
