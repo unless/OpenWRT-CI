@@ -1,21 +1,6 @@
-From: Your Name <your.email@example.com>
-Date: Fri, 7 Aug 2026 00:00:00 +0800
-Subject: [PATCH] an7581: reduce reserved memory for NPU and QDMA buffers
-
-Reduce reserved memory regions:
-- npu_binary (line 28): 10 MB → 2 MB
-- qdma0_buf (line 34): 32 MB → 16 MB
-- qdma1_buf (line 40): 16 MB → 8 MB
-
-Tested on Nokia XG-040G-MD, frees ~34 MB of DRAM.
-
-Signed-off-by: Your Name <your.email@example.com>
-
-diff --git a/target/linux/airoha/dts/an7581.dtsi b/target/linux/airoha/dts/an7581.dtsi
-index 1234567..abcdefg 100644
---- a/target/linux/airoha/dts/an7581.dtsi
-+++ b/target/linux/airoha/dts/an7581.dtsi
-@@ -26,8 +26,8 @@
+--- an7581.dtsi1.txt	2026-08-07 18:51:06.159749186 +0800
++++ an7581.dtsi2.txt	2026-08-07 19:06:04.544296146 +0800
+@@ -27,17 +27,17 @@
  
  		npu_binary: npu-binary@84000000 {
  			no-map;
@@ -26,11 +11,13 @@ index 1234567..abcdefg 100644
  		qdma0_buf: qdma0-buf@87000000 {
  			no-map;
 -			reg = <0x0 0x87000000 0x0 0x2000000>;
-+			reg = <0x0 0x87000000 0x0 0x800000>;
++			reg = <0x0 0x87000000 0x0 0x1000000>;
  		};
  
  		qdma1_buf: qdma1-buf@89000000 {
  			no-map;
 -			reg = <0x0 0x89000000 0x0 0x1000000>;
-+			reg = <0x0 0x89000000 0x0 0x400000>;
++			reg = <0x0 0x89000000 0x0 0x800000>;
  		};
+ 	};
+ 
