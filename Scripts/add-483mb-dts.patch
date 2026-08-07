@@ -1,5 +1,5 @@
---- an7581.dtsi1.txt	2026-08-07 18:51:06.159749186 +0800
-+++ an7581.dtsi2.txt	2026-08-07 19:06:04.544296146 +0800
+--- a/target/linux/airoha/dts/an7581.dtsi
++++ b/target/linux/airoha/dts/an7581.dtsi
 @@ -27,17 +27,17 @@
  
  		npu_binary: npu-binary@84000000 {
@@ -20,4 +20,3 @@
 +			reg = <0x0 0x89000000 0x0 0x800000>;
  		};
  	};
- 
