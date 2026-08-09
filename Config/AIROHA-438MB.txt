@@ -8,6 +8,5 @@ CONFIG_TARGET_airoha_an7581_DEVICE_nokia_xg-040g-md-ubi=y
 CONFIG_PACKAGE_automount=y
 CONFIG_PACKAGE_luci-app-diskman=y
 CONFIG_PACKAGE_luci-app-unishare=y
-CONFIG_PACKAGE_luci-app-webdav=y
-CONFIG_PACKAGE_luci-app-ledtrig-usbport=n
+CONFIG_PACKAGE_luci-app-ledtrig-usbport=y
 CONFIG_WIFI_SCRIPTS_UCODE=n
