@@ -50,7 +50,7 @@ UPDATE_PACKAGE() {
 # UPDATE_PACKAGE "open-app-filter" "destan19/OpenAppFilter" "master" "" "luci-app-appfilter oaf" 这样会把原有的open-app-filter，luci-app-appfilter，oaf相关组件删除，不会出现coremark错误。
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
+# UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
 UPDATE_PACKAGE "aurora" "eamonxg/luci-theme-aurora" "master"
 UPDATE_PACKAGE "aurora-config" "eamonxg/luci-app-aurora-config" "master"
 #UPDATE_PACKAGE "kucat" "sirpdboy/luci-theme-kucat" "master"
@@ -90,7 +90,7 @@ UPDATE_PACKAGE "v2ray-geodata" "unless/v2ray-geodata" "master"
 #UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2 unishare"
 #UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix" "pkg" "luci-app-daed daed"
 #UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
-UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede webdav2 unishare luci-app-unishare luci-app-taskplan luci-app-webdav"
+UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede webdav2 unishare luci-app-unishare luci-app-taskplan luci-app-diskman luci-app-wechatpush luci-theme-argon luci-app-ramfree"
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
 
 #更新软件包版本
