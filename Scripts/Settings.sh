@@ -89,6 +89,8 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
 #        curl -L https://github.com/unless/immortalwrt/commit/ca7137486af261344e8ae99c73d2451aa18467f6.patch | patch -p1 # cpufreq
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
+		curl -L https://github.com/openwrt/openwrt/pull/24593.patch -o 24593.patch
+		head -n 5 24593.patch
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24593.patch | patch -p1 # nowifi
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-483mb-dts.patch | patch -p1 #483mb
 #		curl -L https://github.com/openwrt/openwrt/pull/24265.patch | patch -p1 # cpufreq
