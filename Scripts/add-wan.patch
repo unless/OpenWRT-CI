@@ -11,7 +11,7 @@ diff --git a/target/linux/airoha/an7581/base-files/etc/board.d/02_network b/targ
 index 107ca370462..3572b705fc6 100644
 --- a/target/linux/airoha/an7581/base-files/etc/board.d/02_network
 +++ b/target/linux/airoha/an7581/base-files/etc/board.d/02_network
-@@ -22,7 +22,7 @@ an7581_setup_interfaces()
+@@ -22,7 +22,7 @@
  		;;
  	nokia,xg-040g-md |\
  	nokia,xg-040g-md-ubi)
