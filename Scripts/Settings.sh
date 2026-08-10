@@ -108,7 +108,7 @@ hash_value1=$(get_hash "$URL1"); hash_value2=$(get_hash "$URL2"); hash_value="${
 if [ -n "$hash_value" ]; then
     echo "$hash_value" > .vermagic
     BASE_URL=$( [ -n "$hash_value1" ] && echo "$URL1" || echo "$URL2" )
-    FINAL_URL="${BASE_URL}$(wget -qO- "$BASE_URL" | grep -o "$KERNEL_BASE$PATCH_VER-[0-9]\+-[0-9a-f]\{32\}/" | tail -1)packages.adb"
+    FINAL_URL="${BASE_URL}$(wget -qO- "$BASE_URL" | grep -o "$KERNEL_BASE$PATCH_VER-[0-9]\+-[0-9a-f]\{32\}/" | head -1)packages.adb"
     echo "$FINAL_URL" > package/system/apk/files/customfeeds.list
     sed -i $'/vermagic/c\\\t[ -f $(TOPDIR)/.vermagic ] && cat $(TOPDIR)/.vermagic > $(LINUX_DIR)/.vermagic || grep '\''=[ym]'\'' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic' include/kernel-defaults.mk
 #    sed -i "s/\$(if \$(CONFIG_BUILDBOT)/\$(if 1/" include/feeds.mk
