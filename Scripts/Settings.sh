@@ -103,7 +103,7 @@ KERNEL_BASE=$(sed -n 's/^KERNEL_PATCHVER:=//p' target/linux/${TARGET_DIR%%/*}/Ma
 PATCH_VER=$(sed -n "s/^LINUX_VERSION-$KERNEL_BASE = //p" target/linux/generic/kernel-$KERNEL_BASE)
 URL1="${VERSION_REPO%/*}/${VERSION_REPO##*/}/targets/$TARGET_DIR/kmods/"
 URL2="https://downloads.openwrt.org/${VERSION_REPO##*/}/targets/$TARGET_DIR/kmods/"
-get_hash(){ wget -qO- "$1" | grep -o "$KERNEL_BASE$PATCH_VER-[0-9]\+-[0-9a-f]\{32\}/" | tail -1 | grep -o '[0-9a-f]\{32\}'; }
+get_hash(){ wget -qO- "$1" | grep -o "$KERNEL_BASE$PATCH_VER-[0-9]\+-[0-9a-f]\{32\}/" | head -1 | grep -o '[0-9a-f]\{32\}'; }
 hash_value1=$(get_hash "$URL1"); hash_value2=$(get_hash "$URL2"); hash_value="${hash_value1:-$hash_value2}"
 if [ -n "$hash_value" ]; then
     echo "$hash_value" > .vermagic
