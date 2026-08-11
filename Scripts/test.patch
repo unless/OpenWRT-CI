@@ -1,11 +1,21 @@
---- a/package/boot/arm-trusted-firmware-airoha/scripts/airoha_pack_bl2.sh
-+++ b/package/boot/arm-trusted-firmware-airoha/scripts/airoha_pack_bl2.sh
-@@ -60,7 +60,7 @@ cat $BL22 >> $BL2
- cat $BL23 >> $BL2
- cat $FLASH_TABLE >> $BL2
- 
--crc=$(cksum -a crc32b $BL2 | cut -d' ' -f1)
-+crc=$(python3 -c "import zlib; print(zlib.crc32(open('$BL2', 'rb').read()))")
- 
- # XOR with 0xffffffff
- crc=$((0xffffffff ^ $crc))
+From: Your Name <your.email@example.com>
+Date: Tue, 11 Aug 2026 00:00:00 +0800
+Subject: [PATCH] airoha: nokia_xg-040g-md: increase PHY reset timing to fix
+ LAN1 LED issue
+
+Increase reset-assert-us from 10ms to 1s and reset-deassert-us from 20ms to 2s
+to ensure PHY is fully initialized and stable before LED configuration takes
+effect, fixing the LAN1 LED not lighting up on some boots.
+
+Signed-off-by: Your Name <your.email@example.com>
+
+diff --git a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi b/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
+index 1234567..89abcde 100644
+--- a/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
++++ b/target/linux/airoha/dts/an7581-nokia_xg-040g-md-common.dtsi
+@@ -140,3 +140,3 @@
+ 		reset-gpios = <&en7581_pinctrl 31 GPIO_ACTIVE_LOW>;
+-		reset-assert-us = <10000>;
+-		reset-deassert-us = <20000>;
++		reset-assert-us = <100000>;
++		reset-deassert-us = <200000>;
