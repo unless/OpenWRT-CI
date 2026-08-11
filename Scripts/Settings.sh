@@ -94,7 +94,8 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24624.patch | patch -p1 #2.5g
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24265.patch | patch -p1 # cpufreq
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24644.patch | patch -p1 # AIROHA_FLOW_STATS
-		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/test.patch | patch -p1 # test
+#		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/test.patch | patch -p1 # test
+		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24646.patch | patch -p1 # pinctrl
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
