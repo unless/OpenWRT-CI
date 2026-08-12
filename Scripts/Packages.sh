@@ -70,7 +70,7 @@ UPDATE_PACKAGE "luci-app-aurora-config" "eamonxg/luci-app-aurora-config" "master
 
 #UPDATE_PACKAGE "athena-led" "unraveloop/JDC-AX6600-Athena-LED-Controller" "main"
 #UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
-UPDATE_PACKAGE "luci-app-diskman" "sbwml/luci-app-diskman" "main"
+#UPDATE_PACKAGE "luci-app-diskman" "sbwml/luci-app-diskman" "main"
 #UPDATE_PACKAGE "diskmanager" "4IceG/luci-app-mini-diskmanager" "main"
 UPDATE_PACKAGE "luci-app-easytier" "EasyTier/luci-app-easytier" "main"
 #UPDATE_PACKAGE "mosdns" "sbwml/luci-app-mosdns" "v5" "" "v2dat"
@@ -90,7 +90,7 @@ UPDATE_PACKAGE " luci-app-taskplan" "sirpdboy/luci-app-taskplan" "main"
 #UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2 unishare"
 #UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix" "pkg" "luci-app-daed daed"
 #UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
-UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede webdav2 unishare luci-app-unishare luci-app-wechatpush luci-app-ramfree"
+UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede webdav2 unishare luci-app-unishare"
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
 
 #更新软件包版本
