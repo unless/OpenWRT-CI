@@ -91,7 +91,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24593.patch | patch -p1 # nowifi
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-483mb-dts.patch | patch -p1 #483mb
-#		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24624.patch | patch -p1 #2.5g
+		curl -L https://github.com/openwrt/openwrt/commit/1c68c06b4f12c5249636d2c9bfb80c6069f4951d.patch | patch -p1 #2.5g
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24265.patch | patch -p1 # cpufreq
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24644.patch | patch -p1 # AIROHA_FLOW_STATS
 #		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/test.patch | patch -p1 # test
