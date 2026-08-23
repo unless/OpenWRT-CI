@@ -95,6 +95,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 #		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/test.patch | patch -p1 # test
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24853.patch| patch -p1 # lan1 led
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24872.patch| patch -p1 # DHCP和PPPoE
+		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24856.patch| patch -p1 # npu
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
