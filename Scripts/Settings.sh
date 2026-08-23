@@ -90,9 +90,11 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-483mb-dts.patch | patch -p1 #483mb
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24624.patch | patch -p1 #2.5g
+		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch| patch -p1 # cpu
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24847.patch | patch -p1 # SkyHigh nand
 #		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/test.patch | patch -p1 # test
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24853.patch| patch -p1 # lan1 led
+		
 		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
 	fi
 fi
