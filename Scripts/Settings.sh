@@ -83,17 +83,15 @@ if grep -q "zn_m2=y" .config; then
 fi
 
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
-	if [[ "${WRT_CONFIG,,}" == *"384"* ]]; then
-		echo "WRT_WIFI=384MB" >> $GITHUB_ENV
+	if [[ "${WRT_CONFIG,,}" == *"default"* ]]; then
+		echo "WRT_WIFI=default" >> $GITHUB_ENV
 	
-	elif  [[ "${WRT_CONFIG,,}" == *"438"* ]]; then
+	elif  [[ "${WRT_CONFIG,,}" == *"455"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
-		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-483mb-dts.patch | patch -p1 #483mb
+		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24847.patch | patch -p1 # SkyHigh nand
-		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24853.patch | patch -p1 # lan1 led
-#		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24872.patch | patch -p1 # DHCP和PPPoE
-		echo "WRT_WIFI=438MB" >> $GITHUB_ENV
+		echo "WRT_WIFI=455MB" >> $GITHUB_ENV
 	fi
 fi
 
