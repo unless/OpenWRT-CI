@@ -83,11 +83,15 @@ if grep -q "zn_m2=y" .config; then
 fi
 
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
-	if [[ "${WRT_CONFIG,,}" == *"default"* ]]; then
-		echo "WRT_WIFI=default" >> $GITHUB_ENV
+	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
+		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
+		echo add wan
+	fi
+	
+	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
+		echo "WRT_WIFI=428MB" >> $GITHUB_ENV
 	
 	elif  [[ "${WRT_CONFIG,,}" == *"455"* ]]; then
-		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
 		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24847.patch | patch -p1 # SkyHigh nand
