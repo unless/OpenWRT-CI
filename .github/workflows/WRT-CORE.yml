@@ -77,7 +77,7 @@ jobs:
           sudo -E apt -yqq autoremove --purge
           sudo -E apt -yqq autoclean
           sudo -E apt -yqq clean
-          sudo -E apt -yqq install dos2unix libfuse-dev build-essential autoconf automake libtool pkg-config
+          sudo -E apt -yqq install dos2unix libfuse-dev build-essential autoconf automake libtool pkg-config sccache
           sudo bash -c 'bash <(curl -sL https://build-scripts.immortalwrt.org/init_build_environment.sh)'
           
           sudo -E systemctl daemon-reload
@@ -122,6 +122,7 @@ jobs:
           restore-keys: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}
           path: |
             ./wrt/.ccache
+            ./wrt/.sccache
             ./wrt/staging_dir/host*
             ./wrt/staging_dir/tool*
 
