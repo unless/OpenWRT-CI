@@ -95,7 +95,6 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24847.patch | patch -p1 # SkyHigh nand
-		curl -L https://github.com/VIKINGYFY/immortalwrt/commit/99c39ee7476d1872b080ed486533e8520f3fdad3.patch | patch -p1 # miniupnp
 		echo "WRT_WIFI=455MB" >> $GITHUB_ENV
 	fi
 fi
