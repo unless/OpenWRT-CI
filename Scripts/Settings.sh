@@ -94,7 +94,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	elif  [[ "${WRT_CONFIG,,}" == *"455"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
-#		curl -L https://github.com/openwrt/openwrt/commit/9b835ec6264f3364a22a9c67909f16bf5e5328d1.patch | patch -p1 # python
+		curl -L https://github.com/openwrt/openwrt/commit/9b835ec6264f3364a22a9c67909f16bf5e5328d1.patch | patch -p1 # python
 		echo "WRT_WIFI=455MB" >> $GITHUB_ENV
 	fi
 fi
