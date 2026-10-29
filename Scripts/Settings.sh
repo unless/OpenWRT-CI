@@ -87,10 +87,10 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		echo add wan
 	fi
-	
-	if  [[ "${WRT_SOURCE,,}" == *"VIKINGYFY/immortalwrt"* ]]; then
+
+	if  [[ "${WRT_SOURCE,,}" == *"VIKINGYFY* ]]; then
 		curl -L https://raw.githubusercontent.com/VIKINGYFY/immortalwrt/owrt/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
-		cat target/linux/airoha/Makefile
+		#cat target/linux/airoha/Makefile
 	fi
 	
 	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
