@@ -91,7 +91,8 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"VIKINGYFY/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/VIKINGYFY/immortalwrt/owrt/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
 		echo target/linux/airoha/Makefile
-		
+	fi
+	
 	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
 		echo "WRT_WIFI=428MB" >> $GITHUB_ENV
 	
