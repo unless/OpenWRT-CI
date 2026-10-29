@@ -81,7 +81,7 @@ if grep -q "zn_m2=y" .config; then
 		    target/linux/qualcommax/Makefile
     fi
 fi
-blob:https://github.com/5fd96e3f-512b-43a3-a9a4-6c0b6353b01e
+
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
