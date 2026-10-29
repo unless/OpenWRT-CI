@@ -81,13 +81,17 @@ if grep -q "zn_m2=y" .config; then
 		    target/linux/qualcommax/Makefile
     fi
 fi
-
+blob:https://github.com/5fd96e3f-512b-43a3-a9a4-6c0b6353b01e
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		echo add wan
 	fi
 	
+	if  [[ "${WRT_SOURCE,,}" == *"VIKINGYFY/immortalwrt"* ]]; then
+		curl -L https://raw.githubusercontent.com/VIKINGYFY/immortalwrt/owrt/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
+		echo target/linux/airoha/Makefile
+		
 	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
 		echo "WRT_WIFI=428MB" >> $GITHUB_ENV
 	
