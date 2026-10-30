@@ -83,8 +83,6 @@ if grep -q "zn_m2=y" .config; then
 fi
 
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
-	echo test040g
-	echo ${WRT_SOURCE,,}
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		echo add wan
@@ -93,7 +91,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/immortalwrt/immortalwrt/master/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
 		cat target/linux/airoha/Makefile
-		echo add VIKINGYFY Makefile
+		echo add immortalwrt Makefile
 	fi
 	
 	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
