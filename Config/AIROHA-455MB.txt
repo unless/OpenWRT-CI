@@ -29,3 +29,4 @@ CONFIG_PACKAGE_kmod-airoha-paged-bosa=y
 CONFIG_PACKAGE_luci-app-router-tool=n
 CONFIG_PACKAGE_luci-app-fullconenat-sonic=n
 CONFIG_PACKAGE_fullconenat-sonic=n
+CONFIG_PACKAGE_CONFIG_NSS_FIRMWARE_VERSION_12_5=n
