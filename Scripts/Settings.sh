@@ -91,7 +91,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	fi
 
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
-		curl -L https://raw.githubusercontent.com/VIKINGYFY/immortalwrt/owrt/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
+		curl -L https://raw.githubusercontent.com/immortalwrt/immortalwrt/master/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
 		cat target/linux/airoha/Makefile
 		echo add VIKINGYFY Makefile
 	fi
