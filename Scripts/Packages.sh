@@ -92,6 +92,7 @@ UPDATE_PACKAGE " luci-app-taskplan" "sirpdboy/luci-app-taskplan" "main"
 #UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
 UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede webdav2 unishare luci-app-unishare"
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
+UPDATE_PACKAGE "honk" "kenzok8/openwrt-honk" "main" "pkg" "honk luci-app-honk"
 
 #更新软件包版本
 UPDATE_VERSION() {
