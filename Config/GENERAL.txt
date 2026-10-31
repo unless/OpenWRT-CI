@@ -17,6 +17,7 @@ CONFIG_KERNEL_NETKIT=y
 # LuCI Apps
 CONFIG_PACKAGE_luci-theme-argon=y
 CONFIG_PACKAGE_luci-app-daede=n
+CONFIG_PACKAGE_luci-app-daede_daed=n
 CONFIG_PACKAGE_luci-app-honk=y
 CONFIG_PACKAGE_luci-app-easytier=y
 CONFIG_PACKAGE_luci-app-ramfree=y
