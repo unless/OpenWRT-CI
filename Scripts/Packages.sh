@@ -91,8 +91,10 @@ UPDATE_PACKAGE " luci-app-taskplan" "unless/luci-app-taskplan" "main"
 #UPDATE_PACKAGE "webdav2" "linkease/nas-packages" "master" "pkg" "webdav2 unishare"
 #UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix" "pkg" "luci-app-daed daed"
 #UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
-UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede honk luci-app-honk luci-app-usb-printer webdav2 unishare luci-app-unishare luci-app-easytier"
+UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede luci-app-usb-printer webdav2 unishare luci-app-unishare luci-app-easytier"
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
+UPDATE_PACKAGE "dae" "kenzok8/openwrt-honk" "main" "pkg" "honk luci-app-honk"
+
 
 #更新软件包版本
 UPDATE_VERSION() {
