@@ -86,8 +86,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		echo add wan
-		curl -L https://patch-diff.githubusercontent.com/pbs05/ponwrt/pull/108.patch | patch -p1 # 93
-		echo add 93
+
 	fi
 
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
@@ -102,6 +101,8 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	elif  [[ "${WRT_CONFIG,,}" == *"455"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
+		curl -L https://patch-diff.githubusercontent.com/raw/pbs05/ponwrt/pull/108.patch | patch -p1 # 93
+		echo add 455 93
 		echo "WRT_WIFI=455MB" >> $GITHUB_ENV
 	fi
 fi
