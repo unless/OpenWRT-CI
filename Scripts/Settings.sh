@@ -85,9 +85,9 @@ fi
 if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
-		https://github.com/pbs05/ponwrt/pull/108
-		curl -L https://patch-diff.githubusercontent.com/pbs05/ponwrt/pull/108.patch | patch -p1 # addwan
 		echo add wan
+		curl -L https://patch-diff.githubusercontent.com/pbs05/ponwrt/pull/108.patch | patch -p1 # 93
+		echo add 93
 	fi
 
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
