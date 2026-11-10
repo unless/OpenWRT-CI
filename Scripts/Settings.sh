@@ -86,15 +86,20 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 	if  [[ "${WRT_SOURCE,,}" == *"immortalwrt/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-wan.patch | patch -p1 # addwan
 		echo add wan
-		sed -i 's|^# CONFIG_COMPAT_32BIT_TIME is not set$|CONFIG_COMPAT=y\nCONFIG_COMPAT_32BIT_TIME=y\nCONFIG_COMPAT_ALIGNMENT_FIXUPS=n\nCONFIG_ARMV8_DEPRECATED=n\nCONFIG_ARCH_MMAP_RND_COMPAT_BITS=11|' ./target/linux/airoha/an7581/config-6.18
-		echo add COMPAT_32BIT
-		cat target/linux/airoha/an7581/config-6.18
+
 	fi
 
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
 		curl -L https://raw.githubusercontent.com/immortalwrt/immortalwrt/master/target/linux/airoha/Makefile -o target/linux/airoha/Makefile
 		cat target/linux/airoha/Makefile
 		echo add immortalwrt Makefile
+	fi
+
+	if  [[ "${WRT_SOURCE,,}" == *"pbs05/ponwrt"* ]]; then
+		sed -i 's|^# CONFIG_COMPAT_32BIT_TIME is not set$|CONFIG_COMPAT=y\nCONFIG_COMPAT_32BIT_TIME=y\nCONFIG_COMPAT_ALIGNMENT_FIXUPS=n\nCONFIG_ARMV8_DEPRECATED=n\nCONFIG_ARCH_MMAP_RND_COMPAT_BITS=11|' ./target/linux/airoha/an7581/config-6.18
+		echo add COMPAT_32BIT
+		cat target/linux/airoha/an7581/config-6.18
+		echo add COMPAT_32BIT
 	fi
 	
 	if [[ "${WRT_CONFIG,,}" == *"428"* ]]; then
@@ -104,7 +109,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		curl -L https://raw.githubusercontent.com/unless/OpenWRT-CI/main/Scripts/add-455mb-dts.patch | patch -p1 #455mb
 #		curl -L https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/24732.patch | patch -p1 # cpu
 #		curl -L https://patch-diff.githubusercontent.com/raw/pbs05/ponwrt/pull/108.patch | patch -p1 # 93
-		echo add 455 93
+		echo add 45
 		echo "WRT_WIFI=455MB" >> $GITHUB_ENV
 	fi
 fi
