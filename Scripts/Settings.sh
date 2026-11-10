@@ -88,6 +88,7 @@ if grep -qE '^CONFIG_TARGET_.*_DEVICE_.*040g.*=y' .config; then
 		echo add wan
 		sed -i 's|^# CONFIG_COMPAT_32BIT_TIME is not set$|CONFIG_COMPAT=y\nCONFIG_COMPAT_32BIT_TIME=y\nCONFIG_COMPAT_ALIGNMENT_FIXUPS=n\nCONFIG_ARMV8_DEPRECATED=n\nCONFIG_ARCH_MMAP_RND_COMPAT_BITS=11|' ./target/linux/airoha/an7581/config-6.18
 		echo add COMPAT_32BIT
+		cat target/linux/airoha/an7581/config-6.18
 	fi
 
 	if  [[ "${WRT_SOURCE,,}" == *"vikingyfy/immortalwrt"* ]]; then
