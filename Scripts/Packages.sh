@@ -94,7 +94,7 @@ UPDATE_PACKAGE " luci-app-taskplan" "unless/luci-app-taskplan" "main"
 UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-daede luci-app-usb-printer webdav2 unishare luci-app-unishare luci-app-easytier"
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
 #UPDATE_PACKAGE "honk" "kenzok8/openwrt-honk" "main" "pkg" "honk luci-app-honk"
-UPDATE_PACKAGE "honk" "daeuniverse/openwrt-packages" "main" "pkg" "vmlinux-btf honk luci-app-honk"
+#UPDATE_PACKAGE "honk" "daeuniverse/openwrt-packages" "main" "pkg" "vmlinux-btf honk luci-app-honk"
 UPDATE_PACKAGE "zte" "Leenshady/luci-app-zte-mesh" "main" ""
 
 #更新软件包版本
