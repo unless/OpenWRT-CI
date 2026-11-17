@@ -95,8 +95,9 @@ UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae
 #UPDATE_PACKAGE "dae" "kenzok8/small-package" "main" "pkg" "dae daed luci-app-dae luci-app-daed"
 #UPDATE_PACKAGE "honk" "kenzok8/openwrt-honk" "main" "pkg" "honk luci-app-honk"
 #UPDATE_PACKAGE "honk" "unless/luci-app-honk" "main" ""
-UPDATE_PACKAGE "zte" "Leenshady/luci-app-zte-mesh" "main" ""
-#UPDATE_PACKAGE "honk" "QiuSimons/luci-app-honk" "main" ""
+#UPDATE_PACKAGE "zte" "Leenshady/luci-app-zte-mesh" "main" ""
+UPDATE_PACKAGE "zte" "unless/luci-app-zte-mesh" "main" ""
+UPDATE_PACKAGE "honk" "QiuSimons/luci-app-honk" "main" ""
 
 #更新软件包版本
 UPDATE_VERSION() {
