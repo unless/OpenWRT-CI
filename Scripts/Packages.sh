@@ -98,7 +98,7 @@ UPDATE_PACKAGE "honk" "unless/luci-app-honk" "master" ""
 #UPDATE_PACKAGE "zte" "Leenshady/luci-app-zte-mesh" "main" ""
 UPDATE_PACKAGE "zte" "unless/ztemesh" "main" ""
 #UPDATE_PACKAGE "honk" "QiuSimons/luci-app-honk" "master" ""
-UPDATE_PACKAGE "dae" "kenzok8/openwrt-daede" "main" "pkg" "dae daed luci-app-daede"
+#UPDATE_PACKAGE "dae" "kenzok8/openwrt-daede" "main" "pkg" "dae daed luci-app-daede"
 
 #更新软件包版本
 UPDATE_VERSION() {
